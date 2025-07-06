@@ -75,7 +75,7 @@ def delete_note(
 
     return {"message": "Note deleted"}
 
-# Admin endpoints
+# Admin endpoints 
 @router.post("/admin/notes/{note_id}/restore", response_model=NoteResponse)
 def restore_note(
     note_id: int,
