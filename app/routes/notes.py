@@ -77,7 +77,7 @@ def delete_note(
 
 # Admin endpoints 
 @router.post("/admin/notes/{note_id}/restore", response_model=NoteResponse)
-def restore_note(
+def restore_note_admin(
     note_id: int,
     db: Session = Depends(get_db),
     current_user: UserModel = Depends(get_current_user)
@@ -95,7 +95,7 @@ def restore_note(
     return restored_note
 
 @router.get("/admin/notes", response_model=list[NoteResponse])
-def get_all_notes(
+def get_all_notes_admin(
     db: Session = Depends(get_db),
     current_user: UserModel = Depends(get_current_user)
 ):

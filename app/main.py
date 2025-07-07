@@ -4,7 +4,7 @@ from app.database import Base
 from app.routes import notes, users
 from app.utils.logger import setup_logger
 
-app = FastAPI(title="Notes API")
+app = FastAPI(title="Noter")
 Base.metadata.create_all(bind=engine)
 setup_logger()
 
