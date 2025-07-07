@@ -14,6 +14,16 @@ def create_user_db(db: Session, user_data):
 
     return db_user
 
+def update_user_role_db(db: Session, username: str):
+    user = get_user_db(db=db, username=username)
+
+    setattr(user, "role", "Admin")
+
+    db.commit()
+    db.refresh(user)
+
+    return user
+
 def create_note_db(db: Session, note_data, user_id: int):
     db_note = NoteModel(**note_data.dict(), owner_id=user_id)
 

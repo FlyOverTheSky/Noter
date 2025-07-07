@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app.schemas.user import UserCreate, Token
-from app.crud import create_user_db, get_user_db
+from app.crud import create_user_db, get_user_db, update_user_role_db
 from app.auth import create_access_token
 
 router = APIRouter()
@@ -29,3 +29,11 @@ def login(user: UserCreate, db: Session = Depends(get_db)):
     access_token = create_access_token(data={"sub": db_user.username})
 
     return {"access_token": access_token, "token_type": "bearer"}
+
+# Роут для тестов. Повышает юзера до админа
+@router.post("/update")
+def update(user: UserCreate, db: Session = Depends(get_db)):
+    user = update_user_role_db(db, username=user.username)
+
+    return {"user": user.username, "role": user.role}
+    
